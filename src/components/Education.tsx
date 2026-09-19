@@ -35,7 +35,7 @@ const educations: EducationItem[] = [
   {
     degree: '[MIPA]',
     institution: '[SMAN 7 BANDAR LAMPUNG]',
-    location: 'Indonesia',
+    location: 'Bandar Lampung, Indonesia',
     period: '[2021] – [2024]',
     status: 'completed',
     statusText: 'Lulus',
