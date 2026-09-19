@@ -81,7 +81,7 @@ export default function Hero() {
           className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-400"
         >
           Saya seorang Mahasiswa Rekayasa Perangkat Lunak Politeknik Negeri
-          Lampung semester 5 yang berfokus pada pengembangan{' '}
+          Lampung yang berfokus pada pengembangan{' '}
           <span className="text-zinc-200">Front-end</span> dan juga{' '}
           <span className="text-zinc-200">UI/UX Designer</span>.
         </motion.p>

@@ -55,9 +55,9 @@ export default function About() {
             Fokus &amp; Keahlian Teknis
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
-            Sebagai mahasiswa RPL semester 5, saya berdedikasi mengembangkan
-            keterampilan di bidang software engineering dengan fokus pada
-            pengembangan backend dan arsitektur perangkat lunak.
+            Sebagai mahasiswa RPL, saya berdedikasi mengembangkan keterampilan
+            di bidang software engineering dengan fokus pada Front-End dan juga
+            UI/UX Designer.
           </p>
         </motion.div>
 
