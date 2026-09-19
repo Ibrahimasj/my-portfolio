@@ -40,7 +40,7 @@ const educations: EducationItem[] = [
     status: 'completed',
     statusText: 'Lulus',
     description:
-      'Membangun fondasi logika berpikir komputasional, dasar-dasar pemrograman, serta pemahaman matematika dan sains sebagai pijakan studi lanjut.',
+      'Membangun fondasi logika berpikir komputasional, mempelajari dasar-dasar pemrograman, serta pemahaman matematika dan sains sebagai pijakan studi lanjut.',
     highlights: [
       'Mempelajari dasar algoritma dan pemecahan masalah komputasi.',
       'Aktif mengikuti kegiatan akademik dan eksplorasi teknologi informasi.',
