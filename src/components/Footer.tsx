@@ -20,22 +20,24 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-800 px-6 py-10">
+    <footer className="relative border-t border-blue-500/10 bg-[#050811]/80 px-6 py-10 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 sm:flex-row">
         {/* Left – brand */}
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-slate-400">
           © {new Date().getFullYear()}{' '}
-          <span className="font-semibold text-zinc-300">&lt;Ibraa/&gt;</span>.
-          All rights reserved.
+          <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text font-bold text-transparent">
+            &lt;Ibraa/&gt;
+          </span>
+          . All rights reserved.
         </p>
 
         {/* Center – social icons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <a
             href="https://github.com/Ibrahimasj/ibr4aa"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-white"
+            className="rounded-xl border border-blue-500/15 bg-slate-900/50 p-2.5 text-slate-400 transition-all duration-200 hover:border-blue-400/40 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-md hover:shadow-blue-500/10"
             aria-label="GitHub"
           >
             <GitHubIcon size={18} />
@@ -44,7 +46,7 @@ export default function Footer() {
             href="https://www.instagram.com/iibrahimasj"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg p-2 text-zinc-500 transition-colors hover:text-white"
+            className="rounded-xl border border-blue-500/15 bg-slate-900/50 p-2.5 text-slate-400 transition-all duration-200 hover:border-blue-400/40 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-md hover:shadow-blue-500/10"
             aria-label="Instagram"
           >
             <InstagramIcon size={18} />
@@ -54,10 +56,10 @@ export default function Footer() {
         {/* Right – back to top */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="inline-flex items-center gap-1.5 text-sm text-zinc-500 transition-colors hover:text-emerald-400"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition-colors hover:text-sky-300"
         >
-          Kembali ke atas
-          <ArrowUp size={14} />
+          <span>Kembali ke atas</span>
+          <ArrowUp size={14} className="transition-transform group-hover:-translate-y-0.5" />
         </button>
       </div>
     </footer>

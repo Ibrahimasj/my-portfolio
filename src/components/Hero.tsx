@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Sparkles } from 'lucide-react';
 
 function GitHubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -27,12 +27,13 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24"
+      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-32 pb-20"
     >
-      {/* Ambient gradient blobs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-emerald-500/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-80 w-80 rounded-full bg-teal-500/10 blur-[100px]" />
+      {/* Ambient Mesh Glow Effects */}
+      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+        <div className="absolute top-1/4 h-[420px] w-[620px] rounded-full bg-gradient-to-tr from-blue-900/25 via-sky-600/15 to-transparent blur-[140px]" />
+        <div className="absolute -bottom-10 left-1/3 h-[360px] w-[500px] rounded-full bg-indigo-950/25 blur-[120px]" />
+        <div className="absolute top-1/2 right-1/4 h-[300px] w-[450px] rounded-full bg-blue-600/10 blur-[110px]" />
       </div>
 
       <div className="mx-auto max-w-3xl text-center">
@@ -41,49 +42,60 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="inline-block"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-400">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/40 px-4 py-1.5 text-xs font-medium text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.15)] backdrop-blur-md">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
             </span>
-            Available for Project &amp; Internship
+            <span>Available for Project &amp; Internship</span>
           </span>
         </motion.div>
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-8 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+          className="mt-8 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
         >
           Hi, I&apos;m{' '}
-          <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(56,189,248,0.25)]">
             Ibrahim Ahsan Suryajati
           </span>{' '}
-          👋
+          <span className="inline-block animate-wave origin-[70%_70%]">👋</span>
         </motion.h1>
 
-        <motion.p
+        {/* Subtitle */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.22 }}
-          className="mt-4 text-xl font-semibold text-zinc-300"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-4 flex items-center justify-center gap-2 text-xl font-semibold text-slate-200"
         >
-          Software Engineering Student
-        </motion.p>
+          <Sparkles className="h-5 w-5 text-sky-400" />
+          <span>Software Engineering Student</span>
+          <Sparkles className="h-5 w-5 text-sky-400" />
+        </motion.div>
 
+        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-400"
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-400"
         >
           Saya seorang Mahasiswa Rekayasa Perangkat Lunak Politeknik Negeri
           Lampung yang berfokus pada pengembangan{' '}
-          <span className="text-zinc-200">Front-end</span> dan juga{' '}
-          <span className="text-zinc-200">UI/UX Designer</span>.
+          <span className="font-medium text-slate-200 underline decoration-sky-400/40 underline-offset-4">
+            Front-end
+          </span>{' '}
+          dan juga{' '}
+          <span className="font-medium text-slate-200 underline decoration-sky-400/40 underline-offset-4">
+            UI/UX Designer
+          </span>
+          .
         </motion.p>
 
         {/* CTA buttons */}
@@ -91,18 +103,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <button
             onClick={() => scrollTo('#projects')}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition-all hover:shadow-emerald-500/40 hover:brightness-110"
+            className="group inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.3)] transition-all duration-300 hover:from-blue-500 hover:to-sky-400 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98]"
           >
-            Lihat Proyek Saya
-            <ArrowDown size={16} />
+            <span>Lihat Proyek Saya</span>
+            <ArrowDown size={16} className="transition-transform group-hover:translate-y-0.5" />
           </button>
           <a
-            href="mailto:Ibrahim<akung4131@gmail.com>"
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-6 py-3 text-sm font-semibold text-zinc-300 transition-colors hover:border-zinc-600 hover:bg-zinc-800 hover:text-white"
+            href="mailto:akung4131@gmail.com"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-500/30 bg-slate-900/50 px-7 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-white hover:scale-[1.02] active:scale-[0.98]"
           >
             Hubungi Saya
           </a>
@@ -112,14 +124,14 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="mt-12 flex items-center justify-center gap-4"
         >
           <a
             href="https://github.com/Ibrahimasj/ibr4aa"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg border border-zinc-800 p-2.5 text-zinc-500 transition-colors hover:border-zinc-700 hover:text-white"
+            className="rounded-xl border border-blue-500/20 bg-slate-900/50 p-3 text-slate-400 backdrop-blur-sm transition-all duration-300 hover:border-blue-400/50 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-0.5"
             aria-label="GitHub"
           >
             <GitHubIcon size={20} />
@@ -128,7 +140,7 @@ export default function Hero() {
             href="https://www.instagram.com/iibrahimasj"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg border border-zinc-800 p-2.5 text-zinc-500 transition-colors hover:border-zinc-700 hover:text-white"
+            className="rounded-xl border border-blue-500/20 bg-slate-900/50 p-3 text-slate-400 backdrop-blur-sm transition-all duration-300 hover:border-blue-400/50 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-0.5"
             aria-label="Instagram"
           >
             <InstagramIcon size={20} />

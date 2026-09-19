@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send, Mail } from 'lucide-react';
+import { Send, Mail, MessageSquare } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
 function GitHubIcon({ size = 20 }: { size?: number }) {
@@ -24,16 +24,19 @@ const socials = [
   {
     icon: GitHubIcon,
     label: 'GitHub',
+    handle: '@Ibrahimasj',
     href: 'https://github.com/Ibrahimasj/ibr4aa',
   },
   {
     icon: InstagramIcon,
     label: 'Instagram',
+    handle: '@iibrahimasj',
     href: 'https://www.instagram.com/iibrahimasj',
   },
   {
     icon: Mail,
-    label: 'Email',
+    label: 'Email Langsung',
+    handle: 'akung4131@gmail.com',
     href: 'mailto:akung4131@gmail.com',
   },
 ];
@@ -43,13 +46,17 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: integrate with an API / email service
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setTimeout(() => setSubmitted(false), 3500);
   };
 
   return (
-    <section id="contact" className="px-6 py-24">
+    <section id="contact" className="relative px-6 py-24">
+      {/* Background glow accent */}
+      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+        <div className="h-[420px] w-[600px] rounded-full bg-blue-900/15 blur-[140px]" />
+      </div>
+
       <div className="mx-auto max-w-5xl">
         {/* Section header */}
         <motion.div
@@ -59,15 +66,18 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-950/30 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-sky-400 shadow-sm shadow-blue-500/10">
+            <MessageSquare size={13} />
             Kontak
           </span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Mari Terhubung
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Mari{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
+              Terhubung
+            </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-zinc-400">
-            Tertarik berkolaborasi atau punya pertanyaan? Jangan ragu untuk
-            menghubungi saya melalui form atau media sosial berikut.
+          <p className="mx-auto mt-4 max-w-xl text-slate-400">
+            Tertarik berkolaborasi dalam proyek web atau ingin mendiskusikan peluang baru? Jangan ragu mengirimkan pesan.
           </p>
         </motion.div>
 
@@ -81,67 +91,72 @@ export default function Contact() {
           {/* Contact form */}
           <form
             onSubmit={handleSubmit}
-            className="space-y-5 md:col-span-3"
+            className="rounded-2xl border border-blue-500/10 bg-slate-900/50 p-6 backdrop-blur-xl md:col-span-3 sm:p-8"
           >
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-1.5 block text-sm font-medium text-zinc-300"
+            <div className="space-y-5">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Nama Lengkap
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  placeholder="Masukkan nama Anda"
+                  className="w-full rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Alamat Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  placeholder="nama@email.com"
+                  className="w-full rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Pesan Anda
+                </label>
+                <textarea
+                  id="message"
+                  required
+                  rows={5}
+                  placeholder="Ceritakan tentang proyek atau pertanyaan Anda..."
+                  className="w-full resize-none rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitted}
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.3)] transition-all duration-300 hover:from-blue-500 hover:to-sky-400 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] active:scale-[0.99] disabled:opacity-60 sm:w-auto sm:px-8"
               >
-                Nama
-              </label>
-              <input
-                id="name"
-                type="text"
-                required
-                placeholder="Nama lengkap"
-                className="w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-sm text-white placeholder-zinc-600 outline-none transition-colors focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20"
-              />
+                <span>{submitted ? 'Pesan Terkirim!' : 'Kirim Pesan'}</span>
+                <Send size={16} />
+              </button>
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-1.5 block text-sm font-medium text-zinc-300"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                placeholder="email@contoh.com"
-                className="w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-sm text-white placeholder-zinc-600 outline-none transition-colors focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="mb-1.5 block text-sm font-medium text-zinc-300"
-              >
-                Pesan
-              </label>
-              <textarea
-                id="message"
-                required
-                rows={5}
-                placeholder="Tulis pesan Anda di sini..."
-                className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-sm text-white placeholder-zinc-600 outline-none transition-colors focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={submitted}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition-all hover:shadow-emerald-500/40 hover:brightness-110 disabled:opacity-60"
-            >
-              {submitted ? 'Terkirim!' : 'Kirim Pesan'}
-              <Send size={16} />
-            </button>
           </form>
 
           {/* Social links sidebar */}
           <div className="flex flex-col gap-4 md:col-span-2">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">
-              Temukan saya di
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">
+              Kanal Sosial &amp; Kontak
             </h3>
             {socials.map((s) => (
               <a
@@ -149,14 +164,19 @@ export default function Contact() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-colors hover:border-emerald-500/30 hover:bg-zinc-900"
+                className="group relative flex items-center gap-4 rounded-2xl border border-blue-500/10 bg-slate-900/50 p-4.5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-slate-900/80 hover:shadow-lg hover:shadow-blue-500/10"
               >
-                <div className="rounded-lg bg-zinc-800 p-2.5 text-zinc-400 transition-colors group-hover:bg-emerald-500/10 group-hover:text-emerald-400">
+                <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-sky-400 transition-all duration-300 group-hover:scale-105 group-hover:border-blue-400/40 group-hover:bg-blue-500/20 group-hover:text-sky-300 group-hover:shadow-[0_0_15px_rgba(56,189,248,0.25)]">
                   <s.icon size={20} />
                 </div>
-                <span className="text-sm font-medium text-zinc-300 transition-colors group-hover:text-white">
-                  {s.label}
-                </span>
+                <div>
+                  <span className="block text-sm font-semibold text-white transition-colors duration-200 group-hover:text-sky-300">
+                    {s.label}
+                  </span>
+                  <span className="block text-xs text-slate-400">
+                    {s.handle}
+                  </span>
+                </div>
               </a>
             ))}
           </div>
