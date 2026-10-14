@@ -166,20 +166,20 @@ export default function Hero() {
               <span className="text-xs font-bold text-slate-800">UI/UX &amp; Front-End</span>
             </motion.div>
 
-            {/* Portrait Image Cutout */}
+            {/* Portrait Image */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative w-[280px] sm:w-[340px] pt-6 flex justify-center"
             >
-              <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden rounded-b-[40px]">
+              <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden rounded-[36px] sm:rounded-[42px] border-4 border-white shadow-2xl bg-slate-900/10">
                 <Image
-                  src="/hero-portrait.jpg"
+                  src="/ibra.jpeg"
                   alt="Ibrahim Ahsan Suryajati"
                   fill
                   priority
-                  className="object-cover object-top filter contrast-[1.02]"
+                  className="object-cover object-[50%_35%] filter contrast-[1.02]"
                 />
               </div>
             </motion.div>
