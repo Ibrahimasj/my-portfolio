@@ -36,7 +36,7 @@ const projects: Project[] = [
     title: 'Tanitu Keren',
     category: 'UI/UX Design',
     description:
-      'Aplikasi untuk UMKM untuk memudahkan dalam transaksi jual beli.',
+      'Website untuk memudahkan para petani dalam transaksi jual beli hasil tani.',
     tags: ['Figma'],
     repo: 'https://github.com/Ibrahimasj/ibr4aa',
     featured: false,

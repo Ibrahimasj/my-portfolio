@@ -130,7 +130,7 @@ export default function About() {
               {/* Signature Graphic (matches reference) */}
               <div className="flex flex-col">
                 <span className="font-['Caveat',cursive] text-3xl sm:text-4xl font-bold text-slate-800 -rotate-3 select-none">
-                  Ibrahim Suryajati
+                  Ibrahim Ahsan Suryajati
                 </span>
                 <span className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">
                   Software Engineer
