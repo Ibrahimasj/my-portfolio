@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send, Mail, MessageSquare } from 'lucide-react';
+import { Send, Mail, MessageSquare, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
 function GitHubIcon({ size = 20 }: { size?: number }) {
@@ -22,22 +22,22 @@ function InstagramIcon({ size = 20 }: { size?: number }) {
 
 const socials = [
   {
+    icon: Mail,
+    label: 'Email Langsung',
+    value: 'akung4131@gmail.com',
+    href: 'mailto:akung4131@gmail.com',
+  },
+  {
     icon: GitHubIcon,
-    label: 'GitHub',
-    handle: '@Ibrahimasj',
+    label: 'GitHub Profile',
+    value: 'github.com/Ibrahimasj',
     href: 'https://github.com/Ibrahimasj/ibr4aa',
   },
   {
     icon: InstagramIcon,
     label: 'Instagram',
-    handle: '@iibrahimasj',
+    value: '@iibrahimasj',
     href: 'https://www.instagram.com/iibrahimasj',
-  },
-  {
-    icon: Mail,
-    label: 'Email Langsung',
-    handle: 'akung4131@gmail.com',
-    href: 'mailto:akung4131@gmail.com',
   },
 ];
 
@@ -51,136 +51,159 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-6 py-24">
-      {/* Background glow accent */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="h-[420px] w-[600px] rounded-full bg-blue-900/15 blur-[140px]" />
-      </div>
-
-      <div className="mx-auto max-w-5xl">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-950/30 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-sky-400 shadow-sm shadow-blue-500/10">
-            <MessageSquare size={13} />
-            Kontak
-          </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Mari{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
-              Terhubung
-            </span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Tertarik berkolaborasi dalam proyek web atau ingin mendiskusikan peluang baru? Jangan ragu mengirimkan pesan.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-16 grid gap-10 md:grid-cols-5"
-        >
-          {/* Contact form */}
-          <form
-            onSubmit={handleSubmit}
-            className="rounded-2xl border border-blue-500/10 bg-slate-900/50 p-6 backdrop-blur-xl md:col-span-3 sm:p-8"
+    <section id="contact" className="relative py-24 sm:py-32 bg-white overflow-hidden">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase text-indigo-600"
           >
-            <div className="space-y-5">
+            <span>— Contact</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900"
+          >
+            Have a Project in Mind? Let&apos;s Connect!
+          </motion.h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-slate-600">
+            Terbuka untuk kolaborasi proyek perangkat lunak, freelance, maupun peluang magang (internship).
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="lg:col-span-7 rounded-3xl bg-slate-50/70 p-7 sm:p-10 border border-slate-200/80 shadow-md shadow-slate-200/40"
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                    Nama Anda
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    placeholder="Contoh: Budi Santoso"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                    Alamat Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="nama@email.com"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-medium text-slate-300"
-                >
-                  Nama Lengkap
+                <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                  Topik / Subjek
                 </label>
                 <input
-                  id="name"
+                  id="subject"
                   type="text"
-                  required
-                  placeholder="Masukkan nama Anda"
-                  className="w-full rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
+                  placeholder="Contoh: Diskusi Proyek Front-End / Kolaborasi"
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-slate-300"
-                >
-                  Alamat Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  placeholder="nama@email.com"
-                  className="w-full rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block text-sm font-medium text-slate-300"
-                >
+                <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                   Pesan Anda
                 </label>
                 <textarea
                   id="message"
                   required
-                  rows={5}
-                  placeholder="Ceritakan tentang proyek atau pertanyaan Anda..."
-                  className="w-full resize-none rounded-xl border border-blue-500/20 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200 focus:border-sky-400 focus:bg-slate-950/90 focus:ring-2 focus:ring-sky-500/20"
+                  rows={4}
+                  placeholder="Ceritakan detail ide atau pertanyaan Anda..."
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition-all resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={submitted}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.3)] transition-all duration-300 hover:from-blue-500 hover:to-sky-400 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] active:scale-[0.99] disabled:opacity-60 sm:w-auto sm:px-8"
+                className="group inline-flex items-center gap-3 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white pl-7 pr-2.5 py-2.5 text-sm font-bold shadow-xl shadow-indigo-600/25 transition-all hover:scale-105 active:scale-95 disabled:opacity-75"
               >
-                <span>{submitted ? 'Pesan Terkirim!' : 'Kirim Pesan'}</span>
-                <Send size={16} />
+                <span>{submitted ? 'Pesan Berhasil Terkirim!' : 'Kirim Pesan Sekarang'}</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#bef264] text-indigo-950 transition-transform group-hover:translate-x-0.5">
+                  {submitted ? <CheckCircle2 size={16} /> : <Send size={15} />}
+                </span>
               </button>
-            </div>
-          </form>
+            </form>
+          </motion.div>
 
-          {/* Social links sidebar */}
-          <div className="flex flex-col gap-4 md:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">
-              Kanal Sosial &amp; Kontak
-            </h3>
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center gap-4 rounded-2xl border border-blue-500/10 bg-slate-900/50 p-4.5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-slate-900/80 hover:shadow-lg hover:shadow-blue-500/10"
-              >
-                <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-sky-400 transition-all duration-300 group-hover:scale-105 group-hover:border-blue-400/40 group-hover:bg-blue-500/20 group-hover:text-sky-300 group-hover:shadow-[0_0_15px_rgba(56,189,248,0.25)]">
-                  <s.icon size={20} />
-                </div>
-                <div>
-                  <span className="block text-sm font-semibold text-white transition-colors duration-200 group-hover:text-sky-300">
-                    {s.label}
-                  </span>
-                  <span className="block text-xs text-slate-400">
-                    {s.handle}
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </motion.div>
+          {/* Social Links Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-5 space-y-4"
+          >
+            <div className="rounded-3xl bg-indigo-600 p-8 text-white shadow-xl shadow-indigo-600/20">
+              <span className="inline-block rounded-full bg-indigo-500/50 px-3 py-1 text-xs font-bold text-[#bef264] uppercase tracking-wider">
+                Status Saat Ini
+              </span>
+              <h3 className="mt-4 text-2xl font-extrabold text-white">
+                Siap untuk Magang &amp; Freelance
+              </h3>
+              <p className="mt-2 text-sm text-indigo-100 leading-relaxed">
+                Sedang aktif mencari kesempatan magang industri, project freelance web development, atau kerja sama tim.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-2">
+              {socials.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-2xl bg-slate-50 hover:bg-white p-4.5 sm:p-5 border border-slate-200/80 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3.5">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <Icon size={20} />
+                      </div>
+                      <div>
+                        <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                          {social.label}
+                        </span>
+                        <span className="block text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                          {social.value}
+                        </span>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={16} className="text-slate-400 group-hover:text-indigo-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

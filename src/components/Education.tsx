@@ -1,228 +1,264 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { GraduationCap, Briefcase, Calendar, MapPin, CheckCircle2, ChevronRight } from 'lucide-react';
 
-interface EducationItem {
-  degree: string;
-  institution: string;
+interface ExperienceItem {
+  title: string;
+  organization: string;
   location: string;
   period: string;
-  status: 'current' | 'completed';
-  statusText: string;
-  description: string;
+  status: string;
+  isCurrent: boolean;
+  desc: string;
   highlights: string[];
   tags: string[];
 }
 
-const educations: EducationItem[] = [
+const educations: ExperienceItem[] = [
   {
-    degree: 'D4 Rekayasa Perangkat Lunak',
-    institution: 'Politeknik Negeri Lampung (Polinela)',
+    title: 'D4 Rekayasa Perangkat Lunak',
+    organization: 'Politeknik Negeri Lampung (Polinela)',
     location: 'Bandar Lampung, Indonesia',
     period: '2024 – Sekarang',
-    status: 'current',
-    statusText: 'Semester 5 • Aktif',
-    description:
-      'Mendalami rekayasa perangkat lunak komprehensif mulai dari perancangan arsitektur, basis data, hingga implementasi modern front-end dan back-end development.',
+    status: 'Semester 5 • Aktif',
+    isCurrent: true,
+    desc: 'Mendalami kurikulum rekayasa perangkat lunak secara komprehensif mulai dari perancangan sistem, arsitektur data, hingga implementasi modern front-end dan arsitektur aplikasi.',
     highlights: [
-      'Fokus: Front-End Development, UI/UX Design, dan Software Engineering.',
-      'Menerapkan best practices clean code, modular architecture, dan design systems.',
-      'Mengembangkan aplikasi web responsif dan sistem informasi berbasis kolaborasi tim.',
+      'Fokus utama pada Front-End Development, UI/UX Design, dan Rekayasa Perangkat Lunak.',
+      'Menerapkan prinsip clean code, modular architecture, dan design system.',
+      'Mengembangkan aplikasi web berbasis tim dengan metodologi Agile/Scrum.',
     ],
-    tags: ['Front-End Development', 'UI/UX Design', 'Software Engineering', 'Web Development'],
+    tags: ['Front-End Dev', 'UI/UX Design', 'Software Engineering', 'Next.js'],
   },
   {
-    degree: 'MIPA',
-    institution: 'SMAN 7 BANDAR LAMPUNG',
+    title: 'MIPA (Matematika & Ilmu Pengetahuan Alam)',
+    organization: 'SMAN 7 Bandar Lampung',
     location: 'Bandar Lampung, Indonesia',
     period: '2021 – 2024',
-    status: 'completed',
-    statusText: 'Lulus',
-    description:
-      'Membangun fondasi logika berpikir komputasional, mempelajari dasar-dasar pemrograman, serta pemahaman matematika dan sains sebagai pijakan studi lanjut.',
+    status: 'Lulus',
+    isCurrent: false,
+    desc: 'Membangun fondasi logika berpikir komputasional, eksplorasi dasar algoritma pemrograman, dan sains terapan sebagai landasan kuat menuju perkuliahan teknik informatika.',
     highlights: [
-      'Mempelajari dasar algoritma dan pemecahan masalah komputasi.',
-      'Aktif mengikuti kegiatan akademik dan eksplorasi teknologi informasi.',
+      'Mempelajari dasar logika komputasi dan problem solving algoritma.',
+      'Aktif dalam kegiatan akademik dan teknologi sekolah.',
     ],
     tags: ['Logika & Algoritma', 'Dasar Pemrograman', 'Problem Solving'],
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-    },
+const workExperiences: ExperienceItem[] = [
+  {
+    title: 'Lead Front-End & UI/UX Designer',
+    organization: 'Proyek Kampus SIPANELA (Polinela)',
+    location: 'Bandar Lampung',
+    period: '2024 – Sekarang',
+    status: 'Project Lead',
+    isCurrent: true,
+    desc: 'Memimpin perancangan UI/UX dan implementasi frontend untuk Sistem Pelaporan Anti-Narkoba Lingkungan Kampus dengan fokus pada kerahasiaan data dan kemudahan penggunaan.',
+    highlights: [
+      'Merancang wireframe, flow pengguna, dan interactive design system di Figma.',
+      'Mengembangkan antarmuka responsif menggunakan Next.js, React, TypeScript, dan Tailwind CSS.',
+      'Menghubungkan frontend ke backend REST API secara aman dan real-time.',
+    ],
+    tags: ['Next.js', 'Figma', 'TypeScript', 'Tailwind CSS', 'REST API'],
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-    },
+  {
+    title: 'Independent Web Developer',
+    organization: 'Freelance & Personal Projects',
+    location: 'Remote',
+    period: '2023 – Sekarang',
+    status: 'Ongoing',
+    isCurrent: true,
+    desc: 'Mengerjakan berbagai proyek pembuatan website, REST API, dashboard interaktif, dan eksplorasi teknologi fullstack modern untuk berbagai kebutuhan sistem informasi.',
+    highlights: [
+      'Membangun RESTful API dengan otentikasi JWT dan arsitektur database relasional.',
+      'Mengembangkan dashboard admin analytics interaktif dengan visualisasi data.',
+      'Menerapkan Git workflow dan containerization dengan Docker.',
+    ],
+    tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Docker'],
   },
-};
+];
 
 export default function Education() {
+  const [activeTab, setActiveTab] = useState<'education' | 'work'>('education');
+
+  const items = activeTab === 'education' ? educations : workExperiences;
+
   return (
-    <section id="education" className="relative px-6 py-24">
-      {/* Background glow accent */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="h-[400px] w-[550px] rounded-full bg-blue-900/15 blur-[140px]" />
+    <section id="experience" className="relative py-24 sm:py-32 bg-slate-50/60 overflow-hidden">
+      {/* Background Watermark */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none overflow-hidden opacity-[0.03]">
+        <span className="text-[120px] sm:text-[180px] font-black uppercase text-slate-900 tracking-wider">
+          EXPERIENCE
+        </span>
       </div>
 
-      <div className="mx-auto max-w-4xl">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-950/30 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-sky-400 shadow-sm shadow-blue-500/10">
-            <Sparkles size={13} />
-            Riwayat Pendidikan
-          </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Pendidikan{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
-              Formal
-            </span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Jejak akademis yang membentuk fondasi keahlian teknis dan dedikasi saya dalam dunia rekayasa perangkat lunak.
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase text-indigo-600"
+          >
+            <span>— Education &amp; Work</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900"
+          >
+            My Education &amp; Work Experience
+          </motion.h2>
+
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-600">
+            Jejak akademis dan pengalaman proyek yang membentuk kompetensi teknis saya dalam rekayasa perangkat lunak.
           </p>
-        </motion.div>
 
-        {/* Timeline container */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          className="relative mt-16"
-        >
-          {/* Vertical timeline spine */}
-          <div className="absolute bottom-4 left-4 top-4 w-[2px] bg-gradient-to-b from-blue-500 via-sky-400/40 to-slate-800 sm:left-8" />
+          {/* Pill Tab Selector (matches Jenny UI reference) */}
+          <div className="mt-10 flex items-center justify-center gap-3">
+            <button
+              onClick={() => setActiveTab('education')}
+              className={`group flex items-center gap-2.5 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200 ${
+                activeTab === 'education'
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/25 scale-105'
+                  : 'bg-white text-slate-600 hover:text-indigo-600 hover:bg-slate-100 border border-slate-200/80 shadow-sm'
+              }`}
+            >
+              <GraduationCap
+                size={18}
+                className={activeTab === 'education' ? 'text-[#bef264]' : 'text-slate-400 group-hover:text-indigo-600'}
+              />
+              <span>Education</span>
+            </button>
 
-          {/* Education list */}
-          <div className="space-y-12">
-            {educations.map((edu, index) => {
-              const isCurrent = edu.status === 'current';
-
-              return (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="relative flex items-start"
-                >
-                  {/* Timeline icon node */}
-                  <div className="absolute left-4 -translate-x-1/2 sm:left-8">
-                    <div
-                      className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-transform duration-300 hover:scale-110 sm:h-11 sm:w-11 ${
-                        isCurrent
-                          ? 'border-sky-400 bg-slate-950 text-sky-400 shadow-lg shadow-blue-500/25 ring-4 ring-blue-500/10'
-                          : 'border-slate-700 bg-slate-950 text-slate-400'
-                      }`}
-                    >
-                      <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5" />
-                    </div>
-                  </div>
-
-                  {/* Card content */}
-                  <div className="ml-12 w-full sm:ml-20">
-                    <div className="group relative rounded-2xl border border-blue-500/10 bg-slate-900/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400/30 hover:bg-slate-900/80 hover:shadow-xl hover:shadow-blue-500/10 sm:p-8">
-                      {/* Corner accent glow on hover */}
-                      <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-sky-500/0 blur-2xl transition-all duration-500 group-hover:bg-sky-500/10" />
-
-                      {/* Header row: Degree & Status badge */}
-                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                          <h3 className="text-xl font-bold text-white transition-colors duration-200 group-hover:text-sky-300">
-                            {edu.degree}
-                          </h3>
-                          <p className="mt-1 text-base font-medium text-slate-200">
-                            {edu.institution}
-                          </p>
-                        </div>
-
-                        {/* Status badge */}
-                        <div className="self-start sm:self-auto">
-                          {isCurrent ? (
-                            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-950/40 px-3.5 py-1 text-xs font-semibold text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.15)]">
-                              <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
-                              </span>
-                              {edu.statusText}
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center rounded-full border border-slate-700/80 bg-slate-800/50 px-3 py-1 text-xs font-medium text-slate-400">
-                              {edu.statusText}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Meta information: Period & Location */}
-                      <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-slate-400 sm:text-sm">
-                        <div className="inline-flex items-center gap-1.5 text-slate-300">
-                          <Calendar size={15} className="text-sky-400" />
-                          <span>{edu.period}</span>
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 text-slate-400">
-                          <MapPin size={15} className="text-slate-500" />
-                          <span>{edu.location}</span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
-                        {edu.description}
-                      </p>
-
-                      {/* Highlights */}
-                      {edu.highlights && edu.highlights.length > 0 && (
-                        <ul className="mt-4 space-y-2 border-t border-blue-500/10 pt-4 text-xs text-slate-400 sm:text-sm">
-                          {edu.highlights.map((highlight, hIdx) => (
-                            <li key={hIdx} className="flex items-start gap-2">
-                              <CheckCircle2
-                                size={16}
-                                className="mt-0.5 shrink-0 text-sky-400"
-                              />
-                              <span className="leading-normal">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      {/* Tags / Topics */}
-                      {edu.tags && edu.tags.length > 0 && (
-                        <div className="mt-5 flex flex-wrap gap-2">
-                          {edu.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-blue-800/40 bg-blue-950/40 px-3 py-1 text-[11px] font-medium text-sky-300 transition-colors group-hover:border-blue-700/60 group-hover:text-sky-200"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            <button
+              onClick={() => setActiveTab('work')}
+              className={`group flex items-center gap-2.5 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200 ${
+                activeTab === 'work'
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/25 scale-105'
+                  : 'bg-white text-slate-600 hover:text-indigo-600 hover:bg-slate-100 border border-slate-200/80 shadow-sm'
+              }`}
+            >
+              <Briefcase
+                size={18}
+                className={activeTab === 'work' ? 'text-[#bef264]' : 'text-slate-400 group-hover:text-indigo-600'}
+              />
+              <span>Work &amp; Projects</span>
+            </button>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Content Cards */}
+        <div className="mt-12 sm:mt-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+              className="space-y-6"
+            >
+              {items.map((item, index) => (
+                <div
+                  key={index}
+                  className="group relative rounded-3xl bg-white p-7 sm:p-9 shadow-md shadow-slate-200/60 border border-slate-200/70 transition-all duration-300 hover:shadow-xl hover:border-indigo-300 hover:-translate-y-1"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="flex items-start gap-4">
+                      {/* Icon Avatar */}
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+                        {activeTab === 'education' ? (
+                          <GraduationCap size={22} />
+                        ) : (
+                          <Briefcase size={22} />
+                        )}
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="mt-0.5 text-sm sm:text-base font-semibold text-slate-700">
+                          {item.organization}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Status Pill Badge */}
+                    <div className="self-start sm:self-auto">
+                      {item.isCurrent ? (
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 border border-indigo-200/70 px-3.5 py-1 text-xs font-bold text-indigo-700">
+                          <span className="relative flex h-2 w-2">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
+                          </span>
+                          {item.status}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                          {item.status}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Meta details */}
+                  <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                    <div className="inline-flex items-center gap-1.5 text-slate-700 font-semibold">
+                      <Calendar size={14} className="text-indigo-600" />
+                      <span>{item.period}</span>
+                    </div>
+                    <div className="inline-flex items-center gap-1.5">
+                      <MapPin size={14} className="text-slate-400" />
+                      <span>{item.location}</span>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600">
+                    {item.desc}
+                  </p>
+
+                  {/* Bullet Highlights */}
+                  {item.highlights && item.highlights.length > 0 && (
+                    <ul className="mt-4 space-y-2 border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-600">
+                      {item.highlights.map((h, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                          <CheckCircle2
+                            size={16}
+                            className="mt-0.5 shrink-0 text-indigo-600"
+                          />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {/* Technology Tags */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 group-hover:bg-indigo-50 group-hover:text-indigo-700 transition-colors"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

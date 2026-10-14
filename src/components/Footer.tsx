@@ -19,47 +19,58 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 }
 
 export default function Footer() {
-  return (
-    <footer className="relative border-t border-blue-500/10 bg-[#050811]/80 px-6 py-10 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 sm:flex-row">
-        {/* Left – brand */}
-        <p className="text-sm text-slate-400">
-          © {new Date().getFullYear()}{' '}
-          <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text font-bold text-transparent">
-            &lt;Ibraa/&gt;
-          </span>
-          . All rights reserved.
-        </p>
+  const scrollTo = (id: string) => {
+    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-        {/* Center – social icons */}
-        <div className="flex items-center gap-2">
+  return (
+    <footer className="relative border-t border-slate-200 bg-slate-50 py-12 px-6">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
+        {/* Brand */}
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center -space-x-1">
+            <span className="h-5 w-2.5 -skew-x-12 rounded-sm bg-indigo-600 shadow-sm" />
+            <span className="h-5 w-2.5 -skew-x-12 rounded-sm bg-[#84cc16] shadow-sm translate-y-1" />
+          </div>
+          <span className="text-lg font-extrabold tracking-tight text-slate-900">
+            Ibraa<span className="text-indigo-600">.</span>
+          </span>
+          <span className="text-xs text-slate-400 pl-2">
+            © {new Date().getFullYear()} All rights reserved.
+          </span>
+        </div>
+
+        {/* Social Icons */}
+        <div className="flex items-center gap-2.5">
           <a
             href="https://github.com/Ibrahimasj/ibr4aa"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-blue-500/15 bg-slate-900/50 p-2.5 text-slate-400 transition-all duration-200 hover:border-blue-400/40 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-md hover:shadow-blue-500/10"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-300 shadow-sm transition-all"
             aria-label="GitHub"
           >
-            <GitHubIcon size={18} />
+            <GitHubIcon size={17} />
           </a>
           <a
             href="https://www.instagram.com/iibrahimasj"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl border border-blue-500/15 bg-slate-900/50 p-2.5 text-slate-400 transition-all duration-200 hover:border-blue-400/40 hover:bg-blue-950/40 hover:text-sky-300 hover:shadow-md hover:shadow-blue-500/10"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-300 shadow-sm transition-all"
             aria-label="Instagram"
           >
-            <InstagramIcon size={18} />
+            <InstagramIcon size={17} />
           </a>
         </div>
 
-        {/* Right – back to top */}
+        {/* Back to top */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="group inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition-colors hover:text-sky-300"
+          className="group inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-indigo-600 transition-colors"
         >
-          <span>Kembali ke atas</span>
-          <ArrowUp size={14} className="transition-transform group-hover:-translate-y-0.5" />
+          <span>Back to Top</span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 shadow-sm transition-all">
+            <ArrowUp size={13} className="transition-transform group-hover:-translate-y-0.5" />
+          </span>
         </button>
       </div>
     </footer>

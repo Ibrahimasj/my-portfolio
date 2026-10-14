@@ -1,97 +1,79 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Cpu } from 'lucide-react';
+import { Cpu, Code2, Database, Layout, Terminal } from 'lucide-react';
 
 interface Skill {
   name: string;
-  category: string;
+  category: 'Frontend' | 'Backend' | 'Database' | 'Tools & Design';
 }
 
 const skills: Skill[] = [
-  { name: 'TypeScript', category: 'Language' },
-  { name: 'JavaScript', category: 'Language' },
+  { name: 'TypeScript', category: 'Frontend' },
   { name: 'React', category: 'Frontend' },
-  { name: 'Next.js', category: 'Framework' },
+  { name: 'Next.js', category: 'Frontend' },
+  { name: 'Tailwind CSS', category: 'Frontend' },
+  { name: 'JavaScript (ES6+)', category: 'Frontend' },
   { name: 'Node.js', category: 'Backend' },
   { name: 'Express.js', category: 'Backend' },
+  { name: 'RESTful API', category: 'Backend' },
   { name: 'PostgreSQL', category: 'Database' },
   { name: 'MySQL', category: 'Database' },
-  { name: 'Tailwind CSS', category: 'Styling' },
-  { name: 'Git', category: 'Tool' },
-  { name: 'Docker', category: 'DevOps' },
-  { name: 'REST API', category: 'Architecture' },
+  { name: 'Figma & UI/UX', category: 'Tools & Design' },
+  { name: 'Git & GitHub', category: 'Tools & Design' },
+  { name: 'Docker', category: 'Tools & Design' },
 ];
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-
-const item = {
-  hidden: { opacity: 0, scale: 0.92, y: 15 },
-  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4 } },
-};
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative px-6 py-24">
-      {/* Background glow accent */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="h-[360px] w-[500px] rounded-full bg-blue-900/10 blur-[130px]" />
-      </div>
-
-      <div className="mx-auto max-w-5xl">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-950/30 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-sky-400 shadow-sm shadow-blue-500/10">
-            <Cpu size={13} />
-            Tech Stack
-          </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Keahlian{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
-              Teknis
-            </span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Teknologi dan tools yang saya gunakan secara aktif dalam
-            pengembangan perangkat lunak berkualitas tinggi.
+    <section id="skills" className="relative py-20 bg-slate-50/60 overflow-hidden border-y border-slate-100">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase text-indigo-600"
+          >
+            <span>— Tech Stack</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900"
+          >
+            Technologies I Work With
+          </motion.h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-slate-600">
+            Kombinasi bahasa pemrograman, framework, dan tools yang saya gunakan untuk mewujudkan solusi digital.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Skills grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
-        >
-          {skills.map((skill) => (
+        {/* Skills Grid */}
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
+          {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              variants={item}
-              className="group relative flex flex-col items-center justify-center rounded-2xl border border-blue-500/10 bg-slate-900/50 px-4 py-6 text-center backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400/30 hover:bg-slate-900/80 hover:shadow-xl hover:shadow-blue-500/10"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.03 }}
+              className="group flex items-center gap-2.5 rounded-full bg-white px-5 py-3 shadow-sm hover:shadow-md border border-slate-200/80 hover:border-indigo-400 transition-all duration-200 hover:-translate-y-0.5"
             >
-              {/* Subtle hover background highlight */}
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-              <span className="text-base font-semibold text-white transition-colors duration-200 group-hover:text-sky-300">
+              <span className="h-2 w-2 rounded-full bg-indigo-600 group-hover:scale-125 transition-transform" />
+              <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
                 {skill.name}
               </span>
-              <span className="mt-2 rounded-full border border-blue-800/40 bg-blue-950/40 px-3 py-0.5 text-[11px] font-medium text-sky-300 transition-all duration-200 group-hover:border-blue-700/60 group-hover:bg-blue-900/50 group-hover:text-sky-200">
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
                 {skill.category}
               </span>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

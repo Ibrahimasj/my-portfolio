@@ -1,36 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const caveat = Caveat({
+  variable: "--font-signature",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio — Software Engineering Student",
+  title: "Ibrahim Ahsan Suryajati — Software Engineer & UI/UX Designer",
   description:
-    "Personal portfolio of a Software Engineering student focused on Fullstack/Backend Development & Software Architecture.",
+    "Portfolio of Ibrahim Ahsan Suryajati, Software Engineering student at Politeknik Negeri Lampung focusing on Front-end Development, Software Architecture, and UI/UX Design.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${caveat.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-[#050811] text-slate-100 selection:bg-sky-500/25 selection:text-sky-200 relative overflow-x-hidden">
-        {/* Ambient Global Glow Effects */}
-        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-48 left-1/2 -translate-x-1/2 h-[600px] w-[1100px] rounded-full bg-gradient-to-b from-blue-900/20 via-sky-950/15 to-transparent blur-[140px]" />
-          <div className="absolute top-[40%] -left-64 h-[700px] w-[700px] rounded-full bg-blue-950/15 blur-[150px]" />
-          <div className="absolute top-[75%] -right-64 h-[700px] w-[700px] rounded-full bg-indigo-950/20 blur-[160px]" />
-        </div>
+      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-[#bef264] selection:text-indigo-950 font-sans">
         <div className="relative z-10 flex min-h-full flex-col">
           {children}
         </div>

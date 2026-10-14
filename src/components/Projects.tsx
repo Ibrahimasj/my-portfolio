@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, FolderGit2 } from 'lucide-react';
+import { ExternalLink, ArrowUpRight, FolderGit2 } from 'lucide-react';
 
 function GitHubIcon({ size = 15 }: { size?: number }) {
   return (
@@ -13,148 +13,176 @@ function GitHubIcon({ size = 15 }: { size?: number }) {
 
 interface Project {
   title: string;
+  category: string;
   description: string;
   tags: string[];
   demo?: string;
   repo?: string;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
   {
     title: 'SIPANELA',
+    category: 'Fullstack Web App',
     description:
-      'Sistem Pelaporan Anti-Narkoba Lingkungan Kampus — Platform web untuk memfasilitasi pelaporan dan monitoring aktivitas anti-narkoba di lingkungan kampus secara anonim dan aman.',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind CSS', 'Node.js'],
+      'Sistem Pelaporan Anti-Narkoba Lingkungan Kampus Politeknik Negeri Lampung. Platform web yang dirancang untuk memfasilitasi pelaporan dan monitoring aktivitas anti-narkoba secara aman, anonim, dan real-time.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Node.js'],
     demo: '#',
-    repo: '#',
+    repo: 'https://github.com/Ibrahimasj/ibr4aa',
+    featured: true,
   },
   {
     title: 'Task Management API',
+    category: 'Backend Architecture',
     description:
-      'RESTful API untuk manajemen tugas dengan fitur autentikasi JWT, role-based access control, dan real-time notification.',
+      'RESTful API arsitektur modular untuk manajemen alur kerja tugas dengan sistem otentikasi JWT, role-based access control (RBAC), dokumentasi endpoint Swagger, dan containerization Docker.',
     tags: ['Node.js', 'Express', 'PostgreSQL', 'JWT', 'Docker'],
-    repo: '#',
+    repo: 'https://github.com/Ibrahimasj/ibr4aa',
+    featured: false,
   },
   {
-    title: 'E-Commerce Dashboard',
+    title: 'E-Commerce Admin Dashboard',
+    category: 'UI/UX & Frontend',
     description:
-      'Dashboard admin untuk e-commerce dengan fitur analytics, manajemen produk, dan visualisasi data penjualan interaktif.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Chart.js'],
+      'Dashboard admin interaktif untuk platform e-commerce dengan visualisasi analytics penjualan, manajemen stok produk, dan layout responsif dengan dark/light mode.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Chart.js', 'Figma'],
     demo: '#',
-    repo: '#',
+    repo: 'https://github.com/Ibrahimasj/ibr4aa',
+    featured: false,
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export default function Projects() {
   return (
-    <section id="projects" className="relative px-6 py-24">
-      {/* Ambient Mesh Glow behind Projects */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="h-[450px] w-[650px] rounded-full bg-gradient-to-r from-blue-900/20 via-sky-900/10 to-transparent blur-[140px]" />
+    <section id="projects" className="relative py-24 sm:py-32 bg-white overflow-hidden">
+      {/* Background Subtle Watermark */}
+      <div className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 select-none overflow-hidden opacity-[0.03]">
+        <span className="text-[140px] sm:text-[220px] font-black uppercase text-slate-900 tracking-wider">
+          PROJECTS
+        </span>
       </div>
 
-      <div className="mx-auto max-w-5xl">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-950/30 px-3.5 py-1 text-xs font-semibold uppercase tracking-widest text-sky-400 shadow-sm shadow-blue-500/10">
-            <FolderGit2 size={13} />
-            Portofolio
-          </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Proyek{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
-              Pilihan
-            </span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            Beberapa proyek yang sudah saya kembangkan, mulai dari sistem
-            informasi interaktif hingga arsitektur API backend yang scalable.
-          </p>
-        </motion.div>
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-widest uppercase text-indigo-600"
+            >
+              <span>— Portfolio</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900"
+            >
+              Featured Projects
+            </motion.h2>
+          </div>
 
-        {/* Project cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project) => (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <a
+              href="https://github.com/Ibrahimasj/ibr4aa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 px-5 py-2.5 text-xs sm:text-sm font-bold text-slate-800 shadow-sm hover:shadow transition-all"
+            >
+              <GitHubIcon size={16} />
+              <span>Explore GitHub</span>
+              <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Project Cards Grid */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              variants={item}
-              className="group relative flex flex-col rounded-2xl border border-blue-500/10 bg-slate-900/50 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400/30 hover:bg-slate-900/80 hover:shadow-xl hover:shadow-blue-500/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              className="group relative flex flex-col justify-between rounded-3xl bg-slate-50/70 hover:bg-white p-7 sm:p-8 border border-slate-200/80 hover:border-indigo-300 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
             >
-              {/* Subtle top border gradient accent on hover */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-sky-400/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-white transition-colors duration-200 group-hover:text-sky-300">
-                {project.title}
-              </h3>
-
-              {/* Description */}
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
-                {project.description}
-              </p>
-
-              {/* Tags */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-blue-800/40 bg-blue-950/40 px-3 py-1 text-[11px] font-medium text-sky-300 transition-colors group-hover:border-blue-700/60"
-                  >
-                    {tag}
+              <div>
+                {/* Top Row: Category & Featured Pill */}
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-indigo-50 border border-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700">
+                    {project.category}
                   </span>
-                ))}
+                  {project.featured && (
+                    <span className="rounded-full bg-[#bef264] px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-indigo-950">
+                      Featured
+                    </span>
+                  )}
+                </div>
+
+                {/* Title */}
+                <h3 className="mt-5 text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {project.description}
+                </p>
               </div>
 
-              {/* Links */}
-              <div className="mt-6 flex items-center gap-4 border-t border-blue-500/10 pt-4">
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-sky-300"
-                  >
-                    <ExternalLink size={15} />
-                    <span>Demo</span>
-                  </a>
-                )}
-                {project.repo && (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-sky-300"
-                  >
-                    <GitHubIcon size={15} />
-                    <span>Source</span>
-                  </a>
-                )}
+              <div className="mt-8 pt-6 border-t border-slate-200/60">
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 border border-slate-200/70"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="mt-6 flex items-center gap-3">
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 text-xs font-bold shadow-md shadow-indigo-600/20 transition-all hover:scale-105"
+                    >
+                      <span>Live Demo</span>
+                      <ArrowUpRight size={13} />
+                    </a>
+                  )}
+                  {project.repo && (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-300/80 px-4 py-2 text-xs font-bold transition-all hover:scale-105"
+                    >
+                      <GitHubIcon size={13} />
+                      <span>Source</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

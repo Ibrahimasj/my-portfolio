@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
-  { label: 'Education', href: '#education' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -20,11 +20,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
 
-      // Determine active section based on scroll position
       const sections = navLinks.map((l) => l.href.substring(1));
-      const scrollPos = window.scrollY + 120;
+      const scrollPos = window.scrollY + 140;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -49,30 +48,32 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-5 left-1/2 z-50 w-[94%] max-w-4xl -translate-x-1/2"
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 sm:px-6"
     >
       <nav
-        className={`relative transition-all duration-300 ${
-          mobileOpen
-            ? 'rounded-3xl border border-blue-500/25 bg-slate-950/90 shadow-2xl shadow-blue-950/60 backdrop-blur-2xl'
-            : scrolled
-            ? 'rounded-full border border-blue-500/20 bg-slate-950/80 shadow-lg shadow-blue-950/40 backdrop-blur-xl'
-            : 'rounded-full border border-blue-500/15 bg-slate-950/60 shadow-md shadow-blue-950/30 backdrop-blur-md hover:border-blue-400/30'
+        className={`w-full max-w-6xl transition-all duration-300 ${
+          scrolled
+            ? 'rounded-full bg-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.08)] backdrop-blur-xl border border-slate-200/80 py-2.5 px-6'
+            : 'rounded-full bg-white/70 shadow-[0_4px_20px_rgb(0,0,0,0.04)] backdrop-blur-md border border-slate-200/50 py-3 px-6'
         }`}
       >
-        <div className="flex items-center justify-between px-5 py-2.5 sm:px-6">
-          {/* Logo */}
+        <div className="flex items-center justify-between">
+          {/* Brand Logo with reference twin parallelograms */}
           <button
             onClick={() => handleClick('#home')}
-            className="group flex items-center gap-1 text-lg font-bold tracking-tight text-white transition-transform hover:scale-105"
+            className="group flex items-center gap-2.5 text-left transition-transform hover:scale-105"
           >
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(56,189,248,0.3)]">
-              &lt;Ibraa/&gt;
+            <div className="flex items-center -space-x-1">
+              <span className="h-6 w-3 -skew-x-12 rounded-sm bg-indigo-600 shadow-sm" />
+              <span className="h-6 w-3 -skew-x-12 rounded-sm bg-[#84cc16] shadow-sm translate-y-1" />
+            </div>
+            <span className="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+              Ibraa<span className="text-indigo-600">.</span>
             </span>
           </button>
 
-          {/* Desktop links */}
+          {/* Desktop Navigation Links */}
           <ul className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
@@ -80,64 +81,85 @@ export default function Navbar() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleClick(link.href)}
-                    className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+                    className={`relative px-4 py-1.5 text-sm font-semibold transition-all duration-200 rounded-full ${
                       isActive
-                        ? 'text-sky-300'
-                        : 'text-slate-300 hover:text-sky-400'
+                        ? 'text-indigo-600 font-bold'
+                        : 'text-slate-600 hover:text-indigo-600'
                     }`}
                   >
                     {isActive && (
                       <motion.div
-                        layoutId="activeNavIndicator"
-                        className="absolute inset-0 rounded-full border border-blue-400/30 bg-blue-500/15 shadow-[0_0_12px_rgba(56,189,248,0.25)]"
+                        layoutId="activeNavTab"
+                        className="absolute inset-0 rounded-full bg-indigo-50 border border-indigo-100/80 -z-10"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
-                    <span className="relative z-10">{link.label}</span>
+                    <span>{link.label}</span>
                   </button>
                 </li>
               );
             })}
           </ul>
 
-          {/* Mobile toggle button */}
+          {/* Right Action Button */}
+          <div className="hidden sm:flex items-center gap-3">
+            <button
+              onClick={() => handleClick('#contact')}
+              className="group inline-flex items-center gap-2 rounded-full bg-indigo-600 hover:bg-indigo-700 active:scale-95 px-5 py-2 text-sm font-semibold text-white shadow-md shadow-indigo-600/20 transition-all duration-200"
+            >
+              <span>Contact Me</span>
+              <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-full border border-blue-500/20 bg-blue-950/30 p-2 text-slate-300 transition-colors hover:border-blue-400/40 hover:text-sky-400 md:hidden"
-            aria-label="Toggle menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors md:hidden"
+            aria-label="Toggle Navigation Menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile menu dropdown */}
+        {/* Mobile Dropdown */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.ul
+            <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="overflow-hidden border-t border-blue-500/15 px-5 pb-4 pt-2"
+              className="overflow-hidden md:hidden pt-4 pb-2 border-t border-slate-100 mt-3"
             >
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href.substring(1);
-                return (
-                  <li key={link.href} className="py-1">
-                    <button
-                      onClick={() => handleClick(link.href)}
-                      className={`block w-full rounded-xl px-4 py-2.5 text-left text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? 'border border-blue-400/30 bg-blue-500/15 text-sky-300 shadow-[0_0_12px_rgba(56,189,248,0.2)]'
-                          : 'text-slate-300 hover:bg-slate-900/60 hover:text-sky-400'
-                      }`}
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                );
-              })}
-            </motion.ul>
+              <ul className="flex flex-col gap-1">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href.substring(1);
+                  return (
+                    <li key={link.href}>
+                      <button
+                        onClick={() => handleClick(link.href)}
+                        className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                          isActive
+                            ? 'bg-indigo-50 text-indigo-600 font-bold'
+                            : 'text-slate-700 hover:bg-slate-50'
+                        }`}
+                      >
+                        {link.label}
+                      </button>
+                    </li>
+                  );
+                })}
+                <li className="pt-2">
+                  <button
+                    onClick={() => handleClick('#contact')}
+                    className="w-full text-center py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm shadow-md"
+                  >
+                    Contact Me
+                  </button>
+                </li>
+              </ul>
+            </motion.div>
           )}
         </AnimatePresence>
       </nav>
