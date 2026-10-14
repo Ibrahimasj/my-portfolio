@@ -24,20 +24,20 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'SIPANELA',
-    category: 'Fullstack Mobile App',
+    category: 'Design Mobile App',
     description:
       'Sistem Pelaporan Anti-Narkoba Lingkungan Kampus Politeknik Negeri Lampung. Platform web yang dirancang untuk memfasilitasi pelaporan dan monitoring aktivitas anti-narkoba secara aman, anonim, dan real-time.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Node.js'],
+    tags: ['Figma'],
     demo: '#',
     repo: 'https://github.com/Ibrahimasj/ibr4aa',
     featured: true,
   },
   {
-    title: 'Task Management API',
-    category: 'Backend Architecture',
+    title: 'Tanitu Keren',
+    category: 'UI/UX Design',
     description:
-      'RESTful API arsitektur modular untuk manajemen alur kerja tugas dengan sistem otentikasi JWT, role-based access control (RBAC), dokumentasi endpoint Swagger, dan containerization Docker.',
-    tags: ['Node.js', 'Express', 'PostgreSQL', 'JWT', 'Docker'],
+      'Aplikasi untuk UMKM untuk memudahkan dalam transaksi jual beli.',
+    tags: ['Figma'],
     repo: 'https://github.com/Ibrahimasj/ibr4aa',
     featured: false,
   },
