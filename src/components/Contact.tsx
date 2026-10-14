@@ -24,8 +24,8 @@ const socials = [
   {
     icon: Mail,
     label: 'Email Langsung',
-    value: 'akung4131@gmail.com',
-    href: 'mailto:akung4131@gmail.com',
+    value: 'ibrahimasj8908@gmail.com',
+    href: 'mailto:ibrahimasj8908@gmail.com',
   },
   {
     icon: GitHubIcon,

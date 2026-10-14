@@ -24,7 +24,7 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'SIPANELA',
-    category: 'Fullstack Web App',
+    category: 'Fullstack Mobile App',
     description:
       'Sistem Pelaporan Anti-Narkoba Lingkungan Kampus Politeknik Negeri Lampung. Platform web yang dirancang untuk memfasilitasi pelaporan dan monitoring aktivitas anti-narkoba secara aman, anonim, dan real-time.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Node.js'],

@@ -33,7 +33,7 @@ export default function About() {
                 {/* Vertical Rotated Text Ribbon (matches reference) */}
                 <div className="flex items-center justify-center border-r border-indigo-400/40 pr-5">
                   <span className="rotate-180 [writing-mode:vertical-rl] text-xs font-black tracking-[4px] uppercase text-indigo-200 select-none">
-                    IBRAHIM SURYAJATI
+                    IBRAHIM AHSAN SURYAJATI
                   </span>
                 </div>
 
@@ -79,7 +79,7 @@ export default function About() {
 
             {/* Headline */}
             <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Who is <span className="text-indigo-600">Ibrahim</span> Alexander Suryajati?
+              Who is <span className="text-indigo-600">Ibrahim</span> Ahsan Suryajati?
             </h2>
 
             {/* Description Paragraph */}

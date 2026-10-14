@@ -76,7 +76,7 @@ export default function Hero() {
             className="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:text-lg"
           >
             Mahasiswa Rekayasa Perangkat Lunak Politeknik Negeri Lampung yang berfokus pada pengembangan{' '}
-            <span className="font-semibold text-indigo-600">Front-End Modern</span>,{' '}
+            <span className="font-semibold text-indigo-600">Front-End </span>,{' '}
             <span className="font-semibold text-indigo-600">UI/UX Design</span>, dan arsitektur sistem web interaktif.
           </motion.p>
         </div>
